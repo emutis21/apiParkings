@@ -16,12 +16,12 @@
 
 ## CRUD para Parqueaderos
 
-- [ ] Crear entidades JPA para `Parqueadero`
-- [ ] Crear repositorio `ParqueaderoRepository`
-- [ ] Crear servicio `ParqueaderoService`
-- [ ] Crear controlador `ParqueaderoController`
-- [ ] Crear DTOs para `Parqueadero`
-- [ ] Implementar CRUD para `Parqueadero`
+- [x] Crear entidades JPA para `Parqueadero`
+- [x] Crear repositorio `ParqueaderoRepository`
+- [x] Crear servicio `ParqueaderoService`
+- [x] Crear controlador `ParqueaderoController`
+- [x] Crear DTOs para `Parqueadero`
+- [x] Implementar CRUD para `Parqueadero`
 
 ## CRUD para Áreas
 
@@ -110,3 +110,4 @@
 - [x] Configuración inicial del proyecto
 - [x] Conexión a la base de datos
 - [x] CRUD para Localidades
+- [x] CRUD para Parqueaderos
