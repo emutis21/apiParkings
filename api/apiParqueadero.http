@@ -1,0 +1,35 @@
+# "k_id_parqueadero"	"n_direccion"	"is_disponible"	"k_id_localidad"
+# "001PARK"	"Calle 100 # 15-20"	true	"01USQN"
+# "002PARK"	"Carrera 15 # 100-20"	true	"02SUBA"
+# "003PARK"	"Carrera 20 # 15-20"	true	"03CHPN"
+# "004PARK"	"Calle 15 # 20-20"	true	"04BOSA"
+# "005PARK"	"Carrera 20 # 15-20"	true	"05KENN"
+
+### GET ALL
+GET http://localhost:8080/parqueadero/find
+
+### GET BY ID
+GET http://localhost:8080/parqueadero/find/006PARK
+
+### CREATE LOCALIDAD
+POST http://localhost:8080/parqueadero/create
+Content-Type: application/json
+
+{
+  "idParqueadero": "006PARK",
+  "direccion": "Carrera 20 # 15-20",
+  "disponible": true,
+  "idLocalidad": "05KENN"
+}
+
+### UPDATE LOCALIDAD
+PUT http://localhost:8080/parqueadero/update/006PARK
+Content-Type: application/json
+
+{
+  "direccion": "Carrera 20 # 15c-20",
+  "disponible": false
+}
+
+### DELETE LOCALIDAD
+DELETE http://localhost:8080/parqueadero/delete/006PARK

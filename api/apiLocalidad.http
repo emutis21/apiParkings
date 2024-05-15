@@ -7,13 +7,13 @@
 # "05KENN"	"Kennedy"
 
 ### GET ALL
-GET http://localhost:8080/localidad/findLocalidades
+GET http://localhost:8080/localidad/find
 
 ### GET BY ID
-GET http://localhost:8080/localidad/findLocalidad/01USQN
+GET http://localhost:8080/localidad/find/02MART
 
 ### CREATE LOCALIDAD
-POST http://localhost:8080/localidad/createLocalidad
+POST http://localhost:8080/localidad/create
 Content-Type: application/json
 
 {
@@ -22,7 +22,7 @@ Content-Type: application/json
 }
 
 ### UPDATE LOCALIDAD
-PUT http://localhost:8080/localidad/updateLocalidad/02MART
+PUT http://localhost:8080/localidad/update/02MART
 Content-Type: application/json
 
 {
@@ -30,4 +30,4 @@ Content-Type: application/json
 }
 
 ### DELETE LOCALIDAD
-DELETE http://localhost:8080/localidad/deleteLocalidad/02MART
+DELETE http://localhost:8080/localidad/delete/02MART
