@@ -25,12 +25,12 @@
 
 ## CRUD para Áreas
 
-- [ ] Crear entidades JPA para `Area`
-- [ ] Crear repositorio `AreaRepository`
-- [ ] Crear servicio `AreaService`
-- [ ] Crear controlador `AreaController`
-- [ ] Crear DTOs para `Area`
-- [ ] Implementar CRUD para `Area`
+- [x] Crear entidades JPA para `Area`
+- [x] Crear repositorio `AreaRepository`
+- [x] Crear servicio `AreaService`
+- [x] Crear controlador `AreaController`
+- [x] Crear DTOs para `Area`
+- [x] Implementar CRUD para `Area`
 
 ## CRUD para Espacios
 
