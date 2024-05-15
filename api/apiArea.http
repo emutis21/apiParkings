@@ -1,0 +1,44 @@
+# "n_descripcion"	"k_id_area"	"k_id_parqueadero"	"n_tipo"
+# "Area carros 1 en Usaquén"	"A001"	"001PARK"	"AUTOMOVIL"
+# "Area motos 1 en Usaquén"	"M001"	"001PARK"	"MOTOCICLETA"
+# "Area bicicletas 1 en Usaquén"	"B001"	"001PARK"	"BICICLETA"
+# "Area carros 2 en Suba"	"A002"	"002PARK"	"AUTOMOVIL"
+# "Area motos 2 en Suba"	"M002"	"002PARK"	"MOTOCICLETA"
+# "Area bicicletas 2 en Suba"	"B002"	"002PARK"	"BICICLETA"
+# "Area carros 3 en Chapinero"	"A003"	"003PARK"	"AUTOMOVIL"
+# "Area motos 3 en Chapinero"	"M003"	"003PARK"	"MOTOCICLETA"
+# "Area bicicletas 3 en Chapinero"	"B003"	"003PARK"	"BICICLETA"
+# "Area carros 4 en Bosa"	"A004"	"004PARK"	"AUTOMOVIL"
+# "Area motos 4 en Bosa"	"M004"	"004PARK"	"MOTOCICLETA"
+# "Area bicicletas 4 en Bosa"	"B004"	"004PARK"	"BICICLETA"
+# "Area carros 5 en Kennedy"	"A005"	"005PARK"	"AUTOMOVIL"
+# "Area motos 5 en Kennedy"	"M005"	"005PARK"	"MOTOCICLETA"
+# "Area bicicletas 5 en Kennedy"	"B005"	"005PARK"	"BICICLETA"
+
+### GET ALL
+GET http://localhost:8080/area/find
+
+### GET BY ID
+GET http://localhost:8080/area/find/A001
+
+### CREATE LOCALIDAD
+POST http://localhost:8080/area/create
+Content-Type: application/json
+
+{
+  "idArea": "A006",
+  "descripcion": "Area carros 6 en Usaquén",
+  "tipo": "AUTOMOVIL",
+  "idParqueadero": "001PARK"
+}
+
+### UPDATE LOCALIDAD
+PUT http://localhost:8080/area/update/A006
+Content-Type: application/json
+
+{
+  "descripcion": "Área carros 6 en Usaquén"
+}
+
+### DELETE LOCALIDAD
+DELETE http://localhost:8080/area/delete/A006
