@@ -15,12 +15,12 @@ public class LocalidadController {
   @Autowired
   private ILocalidadService localidadService;
 
-  @GetMapping("/findLocalidades")
+  @GetMapping("/find")
   public ResponseEntity<List<LocalidadDTO>> findAll() {
     return new ResponseEntity<>(this.localidadService.findAll(), HttpStatus.OK);
   }
 
-  @GetMapping("/findLocalidad/{idLocalidad}")
+  @GetMapping("/find/{idLocalidad}")
   public ResponseEntity<LocalidadDTO> findById(
     @PathVariable String idLocalidad
   ) {
@@ -30,7 +30,7 @@ public class LocalidadController {
     );
   }
 
-  @PostMapping("/createLocalidad")
+  @PostMapping("/create")
   public ResponseEntity<LocalidadDTO> createLocalidad(
     @RequestBody LocalidadDTO localidadDTO
   ) {
@@ -46,7 +46,7 @@ public class LocalidadController {
     );
   }
 
-  @PutMapping("/updateLocalidad/{idLocalidad}")
+  @PutMapping("/update/{idLocalidad}")
   public ResponseEntity<LocalidadDTO> updateLocalidad(
     @PathVariable String idLocalidad,
     @RequestBody LocalidadDTO localidadDTO
@@ -57,7 +57,7 @@ public class LocalidadController {
     );
   }
 
-  @DeleteMapping("/deleteLocalidad/{idLocalidad}")
+  @DeleteMapping("/delete/{idLocalidad}")
   public ResponseEntity<String> deleteLocalidad(
     @PathVariable String idLocalidad
   ) {

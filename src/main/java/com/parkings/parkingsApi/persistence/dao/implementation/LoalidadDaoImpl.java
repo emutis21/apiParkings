@@ -28,9 +28,9 @@ public class LoalidadDaoImpl implements ILocalidadDAO {
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<LocalidadEntity> findById(String k_id_localidad) {
+  public Optional<LocalidadEntity> findById(String idLocalidad) {
     return Optional.ofNullable(
-      this.em.find(LocalidadEntity.class, k_id_localidad)
+      this.em.find(LocalidadEntity.class, idLocalidad)
     );
   }
 
