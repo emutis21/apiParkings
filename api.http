@@ -1,0 +1,33 @@
+### CREATE
+# "k_id_localidad"	"n_nombre_localidad"
+# "01USQN"	"Usaquén"
+# "02SUBA"	"Suba"
+# "03CHPN"	"Chapinero"
+# "04BOSA"	"Bosa"
+# "05KENN"	"Kennedy"
+
+### GET ALL
+GET http://localhost:8080/localidad/findLocalidades
+
+### GET BY ID
+GET http://localhost:8080/localidad/findLocalidad/01USQN
+
+### CREATE LOCALIDAD
+POST http://localhost:8080/localidad/createLocalidad
+Content-Type: application/json
+
+{
+  "idLocalidad": "02MART",
+  "nombreLocalidad": "Los Mártires"
+}
+
+### UPDATE LOCALIDAD
+PUT http://localhost:8080/localidad/updateLocalidad/02MART
+Content-Type: application/json
+
+{
+  "nombreLocalidad": "Los Martires"
+}
+
+### DELETE LOCALIDAD
+DELETE http://localhost:8080/localidad/deleteLocalidad/02MART
