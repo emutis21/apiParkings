@@ -2,6 +2,7 @@ package com.parkings.parkingsApi.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Objects;
 import lombok.Getter;
@@ -16,6 +17,10 @@ public class CompositeId implements Serializable {
   private Long numId;
 
   @Column(name = "k_tipo_id")
+  @Pattern(
+    regexp = "^(CC|PA|CE)$",
+    message = "El tipo de identificación debe ser CC, PA o CE"
+  )
   private String tipoId;
 
   public CompositeId() {}
