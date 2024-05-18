@@ -52,13 +52,13 @@
 
 ## Gestión de Registros de Vehículos
 
-- [ ] Crear entidades JPA para `Registro`
-- [ ] Crear repositorio `RegistroRepository`
-- [ ] Crear servicio `RegistroService`
-- [ ] Crear controlador `RegistroController`
-- [ ] Crear DTOs para `Registro`
-- [ ] Implementar registro de entrada de vehículos
-- [ ] Implementar registro de salida de vehículos
+- [x] Crear entidades JPA para `Registro`
+- [x] Crear repositorio `RegistroRepository`
+- [x] Crear servicio `RegistroService`
+- [x] Crear controlador `RegistroController`
+- [x] Crear DTOs para `Registro`
+- [x] Implementar registro de entrada de vehículos
+- [x] Implementar registro de salida de vehículos
 
 ## Gestión de Pagos
 
@@ -114,3 +114,4 @@
 - [x] CRUD para Áreas
 - [x] CRUD para Espacios
 - [x] CRUD para Vigilantes
+- [x] Gestión de Registros de Vehículos
