@@ -43,12 +43,12 @@
 
 ## CRUD para Vigilantes
 
-- [ ] Crear entidades JPA para `Vigilante`
-- [ ] Crear repositorio `VigilanteRepository`
-- [ ] Crear servicio `VigilanteService`
-- [ ] Crear controlador `VigilanteController`
-- [ ] Crear DTOs para `Vigilante`
-- [ ] Implementar CRUD para `Vigilante`
+- [x] Crear entidades JPA para `Vigilante`
+- [x] Crear repositorio `VigilanteRepository`
+- [x] Crear servicio `VigilanteService`
+- [x] Crear controlador `VigilanteController`
+- [x] Crear DTOs para `Vigilante`
+- [x] Implementar CRUD para `Vigilante`
 
 ## Gestión de Registros de Vehículos
 
@@ -113,3 +113,4 @@
 - [x] CRUD para Parqueaderos
 - [x] CRUD para Áreas
 - [x] CRUD para Espacios
+- [x] CRUD para Vigilantes
