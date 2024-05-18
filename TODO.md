@@ -34,12 +34,12 @@
 
 ## CRUD para Espacios
 
-- [ ] Crear entidades JPA para `Espacio`
-- [ ] Crear repositorio `EspacioRepository`
-- [ ] Crear servicio `EspacioService`
-- [ ] Crear controlador `EspacioController`
-- [ ] Crear DTOs para `Espacio`
-- [ ] Implementar CRUD para `Espacio`
+- [x] Crear entidades JPA para `Espacio`
+- [x] Crear repositorio `EspacioRepository`
+- [x] Crear servicio `EspacioService`
+- [x] Crear controlador `EspacioController`
+- [x] Crear DTOs para `Espacio`
+- [x] Implementar CRUD para `Espacio`
 
 ## CRUD para Vigilantes
 
@@ -111,3 +111,5 @@
 - [x] Conexión a la base de datos
 - [x] CRUD para Localidades
 - [x] CRUD para Parqueaderos
+- [x] CRUD para Áreas
+- [x] CRUD para Espacios
