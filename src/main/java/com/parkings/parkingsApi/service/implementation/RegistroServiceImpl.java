@@ -63,18 +63,20 @@ public class RegistroServiceImpl implements IRegistroService {
         RegistroEntity.class
       );
 
-      Optional<EspacioEntity> espacioEntity =
+      Optional<EspacioEntity> espacioEntityOptional =
         this.espacioDAO.findById(Long.valueOf(registroDTO.getIdEspacio()));
 
-      if (!espacioEntity.isPresent()) {
+      if (!espacioEntityOptional.isPresent()) {
         throw new IllegalArgumentException(
-          "El espacio que intenta registrar no existe"
+          "El espacio que intenta asignar al registro no existe"
         );
       }
 
-      EspacioEntity currentEspacioEntity = espacioEntity.get();
+      EspacioEntity espacioEntity = espacioEntityOptional.get();
 
-      currentEspacioEntity.setDisponible(false);
+      espacioEntity.setDisponible(false);
+
+      this.espacioDAO.updateEspacio(espacioEntity);
 
       UUID idRegistro = UUID.randomUUID();
       registroEntity.setIdRegistro(idRegistro);

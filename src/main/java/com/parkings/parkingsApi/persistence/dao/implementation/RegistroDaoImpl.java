@@ -35,9 +35,10 @@ public class RegistroDaoImpl implements IRegistroDAO {
 
   @Override
   @Transactional
-  public void saveRegistro(RegistroEntity registroEntity) {
+  public RegistroEntity saveRegistro(RegistroEntity registroEntity) {
     this.em.persist(registroEntity);
     this.em.flush();
+    return registroEntity;
   }
 
   @Override

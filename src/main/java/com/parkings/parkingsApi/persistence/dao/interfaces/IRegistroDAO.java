@@ -10,7 +10,7 @@ public interface IRegistroDAO {
 
   Optional<RegistroEntity> findById(UUID idRegistro);
 
-  void saveRegistro(RegistroEntity registroEntity);
+  RegistroEntity saveRegistro(RegistroEntity registroEntity);
 
   void updateRegistro(RegistroEntity registroEntity);
 
