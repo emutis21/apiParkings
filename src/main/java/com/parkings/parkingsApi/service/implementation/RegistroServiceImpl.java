@@ -83,7 +83,12 @@ public class RegistroServiceImpl implements IRegistroService {
 
       this.registroDAO.saveRegistro(registroEntity);
 
-      return registroDTO;
+      RegistroDTO savedRegistroDTO = modelMapper.map(
+        registroEntity,
+        RegistroDTO.class
+      );
+
+      return savedRegistroDTO;
     } catch (Exception e) {
       e.printStackTrace();
       throw new UnsupportedOperationException(
