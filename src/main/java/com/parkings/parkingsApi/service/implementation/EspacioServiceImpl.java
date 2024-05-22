@@ -7,7 +7,6 @@ import com.parkings.parkingsApi.service.interfaces.IEspacioService;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +18,16 @@ public class EspacioServiceImpl implements IEspacioService {
 
   @Override
   public List<EspacioDTO> findAll() {
-    ModelMapper modelMapper = new ModelMapper();
-
     return this.espacioDAO.findAll()
       .stream()
-      .map(entity -> modelMapper.map(entity, EspacioDTO.class))
+      .map(entity -> {
+        EspacioDTO dto = new EspacioDTO();
+        dto.setIdEspacio(entity.getIdEspacio());
+        dto.setDisponible(entity.isDisponible());
+        dto.setIdArea(entity.getIdArea());
+
+        return dto;
+      })
       .collect(Collectors.toList());
   }
 
@@ -42,27 +46,33 @@ public class EspacioServiceImpl implements IEspacioService {
 
     if (!espacioEntity.isPresent()) return new EspacioDTO();
 
-    ModelMapper modelMapper = new ModelMapper();
+    EspacioEntity currentEspacioEntity = espacioEntity.get();
 
-    EspacioEntity currentEspacio = espacioEntity.get();
+    EspacioDTO dto = new EspacioDTO();
 
-    return modelMapper.map(currentEspacio, EspacioDTO.class);
+    dto.setIdEspacio(currentEspacioEntity.getIdEspacio());
+    dto.setDisponible(currentEspacioEntity.isDisponible());
+    dto.setIdArea(currentEspacioEntity.getIdArea());
+
+    return dto;
   }
 
   @Override
   public EspacioDTO createEspacio(EspacioDTO espacioDTO) {
     try {
-      ModelMapper modelMapper = new ModelMapper();
-
-      EspacioEntity espacioEntity = modelMapper.map(
-        espacioDTO,
-        EspacioEntity.class
-      );
+      EspacioEntity espacioEntity = new EspacioEntity();
+      espacioEntity.setDisponible(espacioDTO.isDisponible());
+      espacioEntity.setIdArea(espacioDTO.getIdArea());
 
       EspacioEntity savedEspacioEntity =
         this.espacioDAO.saveEspacio(espacioEntity);
 
-      return modelMapper.map(savedEspacioEntity, EspacioDTO.class);
+      EspacioDTO dto = new EspacioDTO();
+      dto.setIdEspacio(savedEspacioEntity.getIdEspacio());
+      dto.setDisponible(savedEspacioEntity.isDisponible());
+      dto.setIdArea(savedEspacioEntity.getIdArea());
+
+      return dto;
     } catch (Exception e) {
       throw new UnsupportedOperationException(
         "Ha ocurrido un error al intentar crear el espacio " + e.getMessage()
@@ -85,9 +95,12 @@ public class EspacioServiceImpl implements IEspacioService {
 
     this.espacioDAO.updateEspacio(currentEspacioEntity);
 
-    ModelMapper modelMapper = new ModelMapper();
+    EspacioDTO dto = new EspacioDTO();
+    dto.setIdEspacio(currentEspacioEntity.getIdEspacio());
+    dto.setDisponible(currentEspacioEntity.isDisponible());
+    dto.setIdArea(currentEspacioEntity.getIdArea());
 
-    return modelMapper.map(currentEspacioEntity, EspacioDTO.class);
+    return dto;
   }
 
   @Override

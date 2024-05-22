@@ -7,7 +7,6 @@ import com.parkings.parkingsApi.service.interfaces.IParqueaderoService;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +18,17 @@ public class ParqueaderoServiceImpl implements IParqueaderoService {
 
   @Override
   public List<ParqueaderoDTO> findAll() {
-    ModelMapper modelMapper = new ModelMapper();
-
     return this.parqueaderoDAO.findAll()
       .stream()
-      .map(entity -> modelMapper.map(entity, ParqueaderoDTO.class))
+      .map(entity -> {
+        ParqueaderoDTO dto = new ParqueaderoDTO();
+        dto.setIdParqueadero(entity.getIdParqueadero());
+        dto.setDireccion(entity.getDireccion());
+        dto.setDisponible(entity.isDisponible());
+        dto.setIdLocalidad(entity.getIdLocalidad());
+
+        return dto;
+      })
       .collect(Collectors.toList());
   }
 
@@ -40,22 +45,27 @@ public class ParqueaderoServiceImpl implements IParqueaderoService {
 
     if (!parqueaderoEntity.isPresent()) return new ParqueaderoDTO();
 
-    ModelMapper modelMapper = new ModelMapper();
+    ParqueaderoEntity currentParqueaderoEntity = parqueaderoEntity.get();
 
-    ParqueaderoEntity currentParqueadero = parqueaderoEntity.get();
+    ParqueaderoDTO dto = new ParqueaderoDTO();
 
-    return modelMapper.map(currentParqueadero, ParqueaderoDTO.class);
+    dto.setIdParqueadero(currentParqueaderoEntity.getIdParqueadero());
+    dto.setDireccion(currentParqueaderoEntity.getDireccion());
+    dto.setDisponible(currentParqueaderoEntity.isDisponible());
+    dto.setIdLocalidad(currentParqueaderoEntity.getIdLocalidad());
+
+    return dto;
   }
 
   @Override
   public ParqueaderoDTO createParqueadero(ParqueaderoDTO parqueaderoDTO) {
     try {
-      ModelMapper modelMapper = new ModelMapper();
+      ParqueaderoEntity parqueaderoEntity = new ParqueaderoEntity();
 
-      ParqueaderoEntity parqueaderoEntity = modelMapper.map(
-        parqueaderoDTO,
-        ParqueaderoEntity.class
-      );
+      parqueaderoEntity.setIdParqueadero(parqueaderoDTO.getIdParqueadero());
+      parqueaderoEntity.setDireccion(parqueaderoDTO.getDireccion());
+      parqueaderoEntity.setDisponible(parqueaderoDTO.isDisponible());
+      parqueaderoEntity.setIdLocalidad(parqueaderoDTO.getIdLocalidad());
 
       this.parqueaderoDAO.saveParqueadero(parqueaderoEntity);
 
@@ -87,9 +97,13 @@ public class ParqueaderoServiceImpl implements IParqueaderoService {
 
     this.parqueaderoDAO.updateParqueadero(currentParqueaderoEntity);
 
-    ModelMapper modelMapper = new ModelMapper();
+    ParqueaderoDTO dto = new ParqueaderoDTO();
+    dto.setIdParqueadero(currentParqueaderoEntity.getIdParqueadero());
+    dto.setDireccion(currentParqueaderoEntity.getDireccion());
+    dto.setDisponible(currentParqueaderoEntity.isDisponible());
+    dto.setIdLocalidad(currentParqueaderoEntity.getIdLocalidad());
 
-    return modelMapper.map(currentParqueaderoEntity, ParqueaderoDTO.class);
+    return dto;
   }
 
   @Override

@@ -7,7 +7,6 @@ import com.parkings.parkingsApi.service.interfaces.IAreaService;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +18,17 @@ public class AreaServiceImpl implements IAreaService {
 
   @Override
   public List<AreaDTO> findAll() {
-    ModelMapper modelMapper = new ModelMapper();
-
     return this.areaDAO.findAll()
       .stream()
-      .map(entity -> modelMapper.map(entity, AreaDTO.class))
+      .map(entity -> {
+        AreaDTO dto = new AreaDTO();
+        dto.setIdArea(entity.getIdArea());
+        dto.setDescripcion(entity.getDescripcion());
+        dto.setTipo(entity.getTipo());
+        dto.setIdParqueadero(entity.getIdParqueadero());
+
+        return dto;
+      })
       .collect(Collectors.toList());
   }
 
@@ -39,19 +44,26 @@ public class AreaServiceImpl implements IAreaService {
 
     if (!areaEntity.isPresent()) return new AreaDTO();
 
-    ModelMapper modelMapper = new ModelMapper();
+    AreaEntity currentAreaEntity = areaEntity.get();
 
-    AreaEntity currentArea = areaEntity.get();
+    AreaDTO dto = new AreaDTO();
 
-    return modelMapper.map(currentArea, AreaDTO.class);
+    dto.setIdArea(currentAreaEntity.getIdArea());
+    dto.setDescripcion(currentAreaEntity.getDescripcion());
+    dto.setTipo(currentAreaEntity.getTipo());
+    dto.setIdParqueadero(currentAreaEntity.getIdParqueadero());
+
+    return dto;
   }
 
   @Override
   public AreaDTO createArea(AreaDTO areaDTO) {
     try {
-      ModelMapper modelMapper = new ModelMapper();
-
-      AreaEntity areaEntity = modelMapper.map(areaDTO, AreaEntity.class);
+      AreaEntity areaEntity = new AreaEntity();
+      areaEntity.setIdArea(areaDTO.getIdArea());
+      areaEntity.setDescripcion(areaDTO.getDescripcion());
+      areaEntity.setTipo(areaDTO.getTipo());
+      areaEntity.setIdParqueadero(areaDTO.getIdParqueadero());
 
       this.areaDAO.saveArea(areaEntity);
 
@@ -71,15 +83,19 @@ public class AreaServiceImpl implements IAreaService {
       "El área no existe"
     );
 
-    AreaEntity currentArea = areaEntity.get();
+    AreaEntity currentAreaEntity = areaEntity.get();
 
-    currentArea.setDescripcion(areaDTO.getDescripcion());
+    currentAreaEntity.setDescripcion(areaDTO.getDescripcion());
 
-    this.areaDAO.saveArea(currentArea);
+    this.areaDAO.saveArea(currentAreaEntity);
 
-    ModelMapper modelMapper = new ModelMapper();
+    AreaDTO dto = new AreaDTO();
+    dto.setIdArea(currentAreaEntity.getIdArea());
+    dto.setDescripcion(currentAreaEntity.getDescripcion());
+    dto.setTipo(currentAreaEntity.getTipo());
+    dto.setIdParqueadero(currentAreaEntity.getIdParqueadero());
 
-    return modelMapper.map(currentArea, AreaDTO.class);
+    return dto;
   }
 
   @Override
@@ -90,9 +106,9 @@ public class AreaServiceImpl implements IAreaService {
       "El área no existe"
     );
 
-    AreaEntity currentArea = areaEntity.get();
+    AreaEntity currentAreaEntity = areaEntity.get();
 
-    this.areaDAO.deleteArea(currentArea);
+    this.areaDAO.deleteArea(currentAreaEntity);
 
     return "Área eliminada " + idArea + " eliminada";
   }

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +24,20 @@ public class RegistroServiceImpl implements IRegistroService {
 
   @Override
   public List<RegistroDTO> findAll() {
-    ModelMapper modelMapper = new ModelMapper();
-
     return this.registroDAO.findAll()
       .stream()
-      .map(entity -> modelMapper.map(entity, RegistroDTO.class))
+      .map(entity -> {
+        RegistroDTO dto = new RegistroDTO();
+        dto.setIdRegistro(entity.getIdRegistro());
+        dto.setPlaca(entity.getPlaca());
+        dto.setFechaHoraEntrada(entity.getFechaHoraEntrada());
+        dto.setFechaHoraSalida(entity.getFechaHoraSalida());
+        dto.setTipoVehiculo(entity.getTipoVehiculo());
+        dto.setIdEspacio(entity.getIdEspacio());
+        dto.setIdArea(entity.getIdArea());
+
+        return dto;
+      })
       .collect(Collectors.toList());
   }
 
@@ -46,22 +54,31 @@ public class RegistroServiceImpl implements IRegistroService {
 
     if (!registroEntity.isPresent()) return new RegistroDTO();
 
-    ModelMapper modelMapper = new ModelMapper();
-
     RegistroEntity currentRegistroEntity = registroEntity.get();
 
-    return modelMapper.map(currentRegistroEntity, RegistroDTO.class);
+    RegistroDTO dto = new RegistroDTO();
+
+    dto.setIdRegistro(currentRegistroEntity.getIdRegistro());
+    dto.setPlaca(currentRegistroEntity.getPlaca());
+    dto.setFechaHoraEntrada(currentRegistroEntity.getFechaHoraEntrada());
+    dto.setFechaHoraSalida(currentRegistroEntity.getFechaHoraSalida());
+    dto.setTipoVehiculo(currentRegistroEntity.getTipoVehiculo());
+    dto.setIdEspacio(currentRegistroEntity.getIdEspacio());
+    dto.setIdArea(currentRegistroEntity.getIdArea());
+
+    return dto;
   }
 
   @Override
   public RegistroDTO createRegistro(RegistroDTO registroDTO) {
     try {
-      ModelMapper modelMapper = new ModelMapper();
-
-      RegistroEntity registroEntity = modelMapper.map(
-        registroDTO,
-        RegistroEntity.class
-      );
+      RegistroEntity registroEntity = new RegistroEntity();
+      registroEntity.setPlaca(registroDTO.getPlaca());
+      registroEntity.setFechaHoraEntrada(registroDTO.getFechaHoraEntrada());
+      registroEntity.setFechaHoraSalida(registroDTO.getFechaHoraSalida());
+      registroEntity.setTipoVehiculo(registroDTO.getTipoVehiculo());
+      registroEntity.setIdEspacio(registroDTO.getIdEspacio());
+      registroEntity.setIdArea(registroDTO.getIdArea());
 
       Optional<EspacioEntity> espacioEntityOptional =
         this.espacioDAO.findById(Long.valueOf(registroDTO.getIdEspacio()));
@@ -73,20 +90,23 @@ public class RegistroServiceImpl implements IRegistroService {
       }
 
       EspacioEntity espacioEntity = espacioEntityOptional.get();
-
       espacioEntity.setDisponible(false);
-
       this.espacioDAO.updateEspacio(espacioEntity);
 
       UUID idRegistro = UUID.randomUUID();
       registroEntity.setIdRegistro(idRegistro);
-
       this.registroDAO.saveRegistro(registroEntity);
 
-      RegistroDTO savedRegistroDTO = modelMapper.map(
-        registroEntity,
-        RegistroDTO.class
+      RegistroDTO savedRegistroDTO = new RegistroDTO();
+      savedRegistroDTO.setIdRegistro(registroEntity.getIdRegistro());
+      savedRegistroDTO.setPlaca(registroEntity.getPlaca());
+      savedRegistroDTO.setFechaHoraEntrada(
+        registroEntity.getFechaHoraEntrada()
       );
+      savedRegistroDTO.setFechaHoraSalida(registroEntity.getFechaHoraSalida());
+      savedRegistroDTO.setTipoVehiculo(registroEntity.getTipoVehiculo());
+      savedRegistroDTO.setIdEspacio(registroEntity.getIdEspacio());
+      savedRegistroDTO.setIdArea(registroEntity.getIdArea());
 
       return savedRegistroDTO;
     } catch (Exception e) {
@@ -115,9 +135,16 @@ public class RegistroServiceImpl implements IRegistroService {
 
     this.registroDAO.saveRegistro(currentRegistroEntity);
 
-    ModelMapper modelMapper = new ModelMapper();
+    RegistroDTO dto = new RegistroDTO();
+    dto.setIdRegistro(currentRegistroEntity.getIdRegistro());
+    dto.setPlaca(currentRegistroEntity.getPlaca());
+    dto.setFechaHoraEntrada(currentRegistroEntity.getFechaHoraEntrada());
+    dto.setFechaHoraSalida(currentRegistroEntity.getFechaHoraSalida());
+    dto.setTipoVehiculo(currentRegistroEntity.getTipoVehiculo());
+    dto.setIdEspacio(currentRegistroEntity.getIdEspacio());
+    dto.setIdArea(currentRegistroEntity.getIdArea());
 
-    return modelMapper.map(currentRegistroEntity, RegistroDTO.class);
+    return dto;
   }
 
   @Override

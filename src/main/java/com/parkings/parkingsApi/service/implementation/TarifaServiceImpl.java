@@ -7,7 +7,6 @@ import com.parkings.parkingsApi.service.interfaces.ITarifaService;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +18,18 @@ public class TarifaServiceImpl implements ITarifaService {
 
   @Override
   public List<TarifaDTO> findAll() {
-    ModelMapper modelMapper = new ModelMapper();
-
     return this.tarifaDAO.findAll()
       .stream()
-      .map(entity -> modelMapper.map(entity, TarifaDTO.class))
+      .map(entity -> {
+        TarifaDTO dto = new TarifaDTO();
+        dto.setIdTarifa(entity.getIdTarifa());
+        dto.setTipoVehiculo(entity.getTipoVehiculo());
+        dto.setVigencia(entity.getVigencia());
+        dto.setValor(entity.getValor());
+        dto.setFactorTarifa(entity.getFactorTarifa());
+
+        return dto;
+      })
       .collect(Collectors.toList());
   }
 
@@ -33,22 +39,27 @@ public class TarifaServiceImpl implements ITarifaService {
 
     if (!tarifaEntity.isPresent()) return new TarifaDTO();
 
-    ModelMapper modelMapper = new ModelMapper();
-
     TarifaEntity currentTarifaEntity = tarifaEntity.get();
 
-    return modelMapper.map(currentTarifaEntity, TarifaDTO.class);
+    TarifaDTO dto = new TarifaDTO();
+    dto.setIdTarifa(currentTarifaEntity.getIdTarifa());
+    dto.setTipoVehiculo(currentTarifaEntity.getTipoVehiculo());
+    dto.setVigencia(currentTarifaEntity.getVigencia());
+    dto.setValor(currentTarifaEntity.getValor());
+    dto.setFactorTarifa(currentTarifaEntity.getFactorTarifa());
+
+    return dto;
   }
 
   @Override
   public TarifaDTO createTarifa(TarifaDTO tarifaDTO) {
     try {
-      ModelMapper modelMapper = new ModelMapper();
-
-      TarifaEntity tarifaEntity = modelMapper.map(
-        tarifaDTO,
-        TarifaEntity.class
-      );
+      TarifaEntity tarifaEntity = new TarifaEntity();
+      tarifaEntity.setIdTarifa(tarifaDTO.getIdTarifa());
+      tarifaEntity.setTipoVehiculo(tarifaDTO.getTipoVehiculo());
+      tarifaEntity.setVigencia(tarifaDTO.getVigencia());
+      tarifaEntity.setValor(tarifaDTO.getValor());
+      tarifaEntity.setFactorTarifa(tarifaDTO.getFactorTarifa());
 
       this.tarifaDAO.saveTarifa(tarifaEntity);
 
@@ -76,9 +87,14 @@ public class TarifaServiceImpl implements ITarifaService {
 
     this.tarifaDAO.updateTarifa(currentTarifaEntity);
 
-    ModelMapper modelMapper = new ModelMapper();
+    TarifaDTO dto = new TarifaDTO();
+    dto.setIdTarifa(currentTarifaEntity.getIdTarifa());
+    dto.setTipoVehiculo(currentTarifaEntity.getTipoVehiculo());
+    dto.setVigencia(currentTarifaEntity.getVigencia());
+    dto.setValor(currentTarifaEntity.getValor());
+    dto.setFactorTarifa(currentTarifaEntity.getFactorTarifa());
 
-    return modelMapper.map(currentTarifaEntity, TarifaDTO.class);
+    return dto;
   }
 
   @Override

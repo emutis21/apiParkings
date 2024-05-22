@@ -7,7 +7,6 @@ import com.parkings.parkingsApi.service.interfaces.ILocalidadService;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +18,15 @@ public class LocalidadServiceImpl implements ILocalidadService {
 
   @Override
   public List<LocalidadDTO> findAll() {
-    ModelMapper modelMapper = new ModelMapper();
-
     return this.localidadDAO.findAll()
       .stream()
-      .map(entity -> modelMapper.map(entity, LocalidadDTO.class))
+      .map(entity -> {
+        LocalidadDTO dto = new LocalidadDTO();
+        dto.setIdLocalidad(entity.getIdLocalidad());
+        dto.setNombreLocalidad(entity.getNombreLocalidad());
+
+        return dto;
+      })
       .collect(Collectors.toList());
   }
 
@@ -34,22 +37,22 @@ public class LocalidadServiceImpl implements ILocalidadService {
 
     if (!localidadEntity.isPresent()) return new LocalidadDTO();
 
-    ModelMapper modelMapper = new ModelMapper();
+    LocalidadEntity currentLocalidadEntity = localidadEntity.get();
 
-    LocalidadEntity currentLocalidad = localidadEntity.get();
+    LocalidadDTO dto = new LocalidadDTO();
 
-    return modelMapper.map(currentLocalidad, LocalidadDTO.class);
+    dto.setIdLocalidad(currentLocalidadEntity.getIdLocalidad());
+    dto.setNombreLocalidad(currentLocalidadEntity.getNombreLocalidad());
+
+    return dto;
   }
 
   @Override
   public LocalidadDTO createLocalidad(LocalidadDTO localidadDTO) {
     try {
-      ModelMapper modelMapper = new ModelMapper();
-
-      LocalidadEntity localidadEntity = modelMapper.map(
-        localidadDTO,
-        LocalidadEntity.class
-      );
+      LocalidadEntity localidadEntity = new LocalidadEntity();
+      localidadEntity.setIdLocalidad(localidadDTO.getIdLocalidad());
+      localidadEntity.setNombreLocalidad(localidadDTO.getNombreLocalidad());
 
       this.localidadDAO.saveLocalidad(localidadEntity);
 
@@ -82,9 +85,11 @@ public class LocalidadServiceImpl implements ILocalidadService {
 
     this.localidadDAO.updateLocalidad(currentLocalidadEntity);
 
-    ModelMapper modelMapper = new ModelMapper();
+    LocalidadDTO dto = new LocalidadDTO();
+    dto.setIdLocalidad(currentLocalidadEntity.getIdLocalidad());
+    dto.setNombreLocalidad(currentLocalidadEntity.getNombreLocalidad());
 
-    return modelMapper.map(currentLocalidadEntity, LocalidadDTO.class);
+    return dto;
   }
 
   @Override

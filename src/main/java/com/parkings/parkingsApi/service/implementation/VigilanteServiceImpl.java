@@ -8,7 +8,6 @@ import com.parkings.parkingsApi.service.interfaces.IVigilanteService;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +19,20 @@ public class VigilanteServiceImpl implements IVigilanteService {
 
   @Override
   public List<VigilanteDTO> findAll() {
-    ModelMapper modelMapper = new ModelMapper();
-
     return this.vigilanteEntity.findAll()
       .stream()
-      .map(entity -> modelMapper.map(entity, VigilanteDTO.class))
+      .map(entity -> {
+        VigilanteDTO dto = new VigilanteDTO();
+        dto.setId(entity.getId());
+        dto.setApellido1(entity.getApellido1());
+        dto.setApellido2(entity.getApellido2());
+        dto.setHasPerro(entity.getHasPerro());
+        dto.setIdArea(entity.getIdArea());
+        dto.setNombre1(entity.getNombre1());
+        dto.setNombre2(entity.getNombre2());
+
+        return dto;
+      })
       .collect(Collectors.toList());
   }
 
@@ -35,22 +43,32 @@ public class VigilanteServiceImpl implements IVigilanteService {
 
     if (!vigilanteEntity.isPresent()) return new VigilanteDTO();
 
-    ModelMapper modelMapper = new ModelMapper();
-
     VigilanteEntity currentVigilante = vigilanteEntity.get();
 
-    return modelMapper.map(currentVigilante, VigilanteDTO.class);
+    VigilanteDTO dto = new VigilanteDTO();
+
+    dto.setId(currentVigilante.getId());
+    dto.setApellido1(currentVigilante.getApellido1());
+    dto.setApellido2(currentVigilante.getApellido2());
+    dto.setHasPerro(currentVigilante.getHasPerro());
+    dto.setIdArea(currentVigilante.getIdArea());
+    dto.setNombre1(currentVigilante.getNombre1());
+    dto.setNombre2(currentVigilante.getNombre2());
+
+    return dto;
   }
 
   @Override
   public VigilanteDTO createVigilante(VigilanteDTO vigilanteDTO) {
     try {
-      ModelMapper modelMapper = new ModelMapper();
-
-      VigilanteEntity vigilanteEntity = modelMapper.map(
-        vigilanteDTO,
-        VigilanteEntity.class
-      );
+      VigilanteEntity vigilanteEntity = new VigilanteEntity();
+      vigilanteEntity.setId(vigilanteDTO.getId());
+      vigilanteEntity.setApellido1(vigilanteDTO.getApellido1());
+      vigilanteEntity.setApellido2(vigilanteDTO.getApellido2());
+      vigilanteEntity.setHasPerro(vigilanteDTO.getHasPerro());
+      vigilanteEntity.setIdArea(vigilanteDTO.getIdArea());
+      vigilanteEntity.setNombre1(vigilanteDTO.getNombre1());
+      vigilanteEntity.setNombre2(vigilanteDTO.getNombre2());
 
       this.vigilanteEntity.saveVigilante(vigilanteEntity);
 
@@ -95,9 +113,16 @@ public class VigilanteServiceImpl implements IVigilanteService {
 
     this.vigilanteEntity.updateVigilante(currentVigilanteEntity);
 
-    ModelMapper modelMapper = new ModelMapper();
+    VigilanteDTO dto = new VigilanteDTO();
+    dto.setId(currentVigilanteEntity.getId());
+    dto.setApellido1(currentVigilanteEntity.getApellido1());
+    dto.setApellido2(currentVigilanteEntity.getApellido2());
+    dto.setHasPerro(currentVigilanteEntity.getHasPerro());
+    dto.setIdArea(currentVigilanteEntity.getIdArea());
+    dto.setNombre1(currentVigilanteEntity.getNombre1());
+    dto.setNombre2(currentVigilanteEntity.getNombre2());
 
-    return modelMapper.map(currentVigilanteEntity, VigilanteDTO.class);
+    return dto;
   }
 
   @Override

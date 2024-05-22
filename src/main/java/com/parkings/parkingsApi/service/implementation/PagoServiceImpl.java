@@ -4,8 +4,10 @@ import com.parkings.parkingsApi.persistence.dao.interfaces.IPagoDAO;
 import com.parkings.parkingsApi.persistence.dao.interfaces.IRegistroDAO;
 import com.parkings.parkingsApi.persistence.entity.PagoEntity;
 import com.parkings.parkingsApi.persistence.entity.RegistroEntity;
+import com.parkings.parkingsApi.persistence.entity.TarifaEntity;
 import com.parkings.parkingsApi.presentation.dto.PagoDTO;
 import com.parkings.parkingsApi.service.interfaces.IPagoService;
+import com.parkings.parkingsApi.service.interfaces.ITarifaService;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,6 +20,12 @@ public class PagoServiceImpl implements IPagoService {
 
   @Autowired
   private IPagoDAO pagoDAO;
+
+  @Autowired
+  private IRegistroDAO registroDAO;
+
+  @Autowired
+  private ITarifaService tarifaService;
 
   @Override
   public List<PagoDTO> findAll() {
@@ -48,9 +56,6 @@ public class PagoServiceImpl implements IPagoService {
     return modelMapper.map(currentPagoEntity, PagoDTO.class);
   }
 
-  @Autowired
-  private IRegistroDAO registroDAO;
-
   @Override
   public PagoDTO createPago(PagoDTO pagoDTO) {
     try {
@@ -59,6 +64,8 @@ public class PagoServiceImpl implements IPagoService {
       PagoEntity pagoEntity = modelMapper.map(pagoDTO, PagoEntity.class);
 
       this.pagoDAO.savePago(pagoEntity);
+
+      // TODO: Implementar lógica para calcular el valor del pago
 
       Optional<RegistroEntity> registroEntity =
         this.registroDAO.findById(pagoDTO.getIdRegistro());
