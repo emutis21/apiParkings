@@ -74,7 +74,6 @@ public class RegistroServiceImpl implements IRegistroService {
     try {
       RegistroEntity registroEntity = new RegistroEntity();
       registroEntity.setPlaca(registroDTO.getPlaca());
-      registroEntity.setFechaHoraEntrada(registroDTO.getFechaHoraEntrada());
       registroEntity.setFechaHoraSalida(registroDTO.getFechaHoraSalida());
       registroEntity.setTipoVehiculo(registroDTO.getTipoVehiculo());
       registroEntity.setIdEspacio(registroDTO.getIdEspacio());
@@ -112,7 +111,7 @@ public class RegistroServiceImpl implements IRegistroService {
     } catch (Exception e) {
       e.printStackTrace();
       throw new UnsupportedOperationException(
-        "Ocurrió un error al intentar crear el registro",
+        "Ocurrió un error al intentar crear el registro" + e.getMessage(),
         e
       );
     }

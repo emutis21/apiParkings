@@ -13,6 +13,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Getter
 @Setter
@@ -34,7 +35,8 @@ public class RegistroEntity {
   )
   private String placa;
 
-  @Column(name = "f_h_entrada")
+  @Column(name = "f_h_entrada", updatable = false)
+  @CreationTimestamp
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
   private LocalDateTime fechaHoraEntrada;
 

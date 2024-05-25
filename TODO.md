@@ -62,13 +62,22 @@
 
 ## Gestión de Pagos
 
-- [ ] Crear entidades JPA para `Pago`
-- [ ] Crear repositorio `PagoRepository`
-- [ ] Crear servicio `PagoService`
-- [ ] Crear controlador `PagoController`
-- [ ] Crear DTOs para `Pago`
-- [ ] Implementar registro de pagos
-- [ ] Implementar confirmación de pagos
+- [x] Crear entidades JPA para `Pago`
+- [x] Crear repositorio `PagoRepository`
+- [x] Crear servicio `PagoService`
+- [x] Crear controlador `PagoController`
+- [x] Crear DTOs para `Pago`
+- [x] Implementar registro de pagos
+- [x] Implementar confirmación de pagos
+
+## CRUD para tarifas
+
+- [x] Crear entidades JPA para `Tarifa`
+- [x] Crear repositorio `TarifaRepository`
+- [x] Crear servicio `TarifaService`
+- [x] Crear controlador `TarifaController`
+- [x] Crear DTOs para `Tarifa`
+- [x] Implementar CRUD para `Tarifa`
 
 ## Cálculo de Tarifas
 
@@ -115,3 +124,5 @@
 - [x] CRUD para Espacios
 - [x] CRUD para Vigilantes
 - [x] Gestión de Registros de Vehículos
+- [x] Gestión de Pagos
+- [x] CRUD para Tarifas
