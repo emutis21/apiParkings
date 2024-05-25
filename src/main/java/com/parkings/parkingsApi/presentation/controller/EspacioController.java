@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/espacio")
 public class EspacioController {
 
@@ -24,6 +25,16 @@ public class EspacioController {
   public ResponseEntity<EspacioDTO> findById(@PathVariable Long idEspacio) {
     return new ResponseEntity<>(
       this.espacioService.findById(idEspacio),
+      HttpStatus.OK
+    );
+  }
+
+  @GetMapping("/find/area/{idArea}")
+  public ResponseEntity<List<EspacioDTO>> findAllByArea(
+    @PathVariable String idArea
+  ) {
+    return new ResponseEntity<>(
+      this.espacioService.findAllByArea(idArea),
       HttpStatus.OK
     );
   }

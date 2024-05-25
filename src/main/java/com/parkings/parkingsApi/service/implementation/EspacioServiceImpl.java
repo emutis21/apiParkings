@@ -58,6 +58,22 @@ public class EspacioServiceImpl implements IEspacioService {
   }
 
   @Override
+  public List<EspacioDTO> findAllByArea(String idArea) {
+    return this.espacioDAO.findAll()
+      .stream()
+      .filter(entity -> entity.getIdArea().equals(idArea))
+      .map(entity -> {
+        EspacioDTO dto = new EspacioDTO();
+        dto.setIdEspacio(entity.getIdEspacio());
+        dto.setDisponible(entity.isDisponible());
+        dto.setIdArea(entity.getIdArea());
+
+        return dto;
+      })
+      .collect(Collectors.toList());
+  }
+
+  @Override
   public EspacioDTO createEspacio(EspacioDTO espacioDTO) {
     try {
       EspacioEntity espacioEntity = new EspacioEntity();

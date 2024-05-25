@@ -8,6 +8,8 @@ public interface IEspacioService {
 
   EspacioDTO findById(Long idEspacio);
 
+  List<EspacioDTO> findAllByArea(String idArea);
+
   EspacioDTO createEspacio(EspacioDTO espacioDTO);
 
   EspacioDTO updateEspacio(Long idEspacio, EspacioDTO espacioDTO);
