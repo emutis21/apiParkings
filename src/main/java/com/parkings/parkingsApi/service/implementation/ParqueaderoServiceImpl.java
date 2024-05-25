@@ -58,6 +58,23 @@ public class ParqueaderoServiceImpl implements IParqueaderoService {
   }
 
   @Override
+  public List<ParqueaderoDTO> findAllByLocalidad(String idLocalidad) {
+    return this.parqueaderoDAO.findAll()
+      .stream()
+      .filter(entity -> entity.getIdLocalidad().equals(idLocalidad))
+      .map(entity -> {
+        ParqueaderoDTO dto = new ParqueaderoDTO();
+        dto.setIdParqueadero(entity.getIdParqueadero());
+        dto.setDireccion(entity.getDireccion());
+        dto.setDisponible(entity.isDisponible());
+        dto.setIdLocalidad(entity.getIdLocalidad());
+
+        return dto;
+      })
+      .collect(Collectors.toList());
+  }
+
+  @Override
   public ParqueaderoDTO createParqueadero(ParqueaderoDTO parqueaderoDTO) {
     try {
       ParqueaderoEntity parqueaderoEntity = new ParqueaderoEntity();

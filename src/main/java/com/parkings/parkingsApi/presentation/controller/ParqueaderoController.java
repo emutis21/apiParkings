@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/parqueadero")
 public class ParqueaderoController {
 
@@ -36,6 +38,16 @@ public class ParqueaderoController {
   ) {
     return new ResponseEntity<>(
       this.parqueaderoService.findById(idParqueadero),
+      HttpStatus.OK
+    );
+  }
+
+  @GetMapping("/find/localidad/{idLocalidad}")
+  public ResponseEntity<List<ParqueaderoDTO>> findAllByLocalidad(
+    @PathVariable String idLocalidad
+  ) {
+    return new ResponseEntity<>(
+      this.parqueaderoService.findAllByLocalidad(idLocalidad),
       HttpStatus.OK
     );
   }

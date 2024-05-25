@@ -8,6 +8,8 @@ public interface IParqueaderoService {
 
   ParqueaderoDTO findById(String idParqueadero);
 
+  List<ParqueaderoDTO> findAllByLocalidad(String idLocalidad);
+
   ParqueaderoDTO createParqueadero(ParqueaderoDTO parqueaderoDTO);
 
   ParqueaderoDTO updateParqueadero(
