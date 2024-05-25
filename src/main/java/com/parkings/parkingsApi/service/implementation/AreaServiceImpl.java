@@ -57,6 +57,23 @@ public class AreaServiceImpl implements IAreaService {
   }
 
   @Override
+  public List<AreaDTO> findAllByParqueadero(String idParqueadero) {
+    return this.areaDAO.findAll()
+      .stream()
+      .filter(entity -> entity.getIdParqueadero().equals(idParqueadero))
+      .map(entity -> {
+        AreaDTO dto = new AreaDTO();
+        dto.setIdArea(entity.getIdArea());
+        dto.setDescripcion(entity.getDescripcion());
+        dto.setTipo(entity.getTipo());
+        dto.setIdParqueadero(entity.getIdParqueadero());
+
+        return dto;
+      })
+      .collect(Collectors.toList());
+  }
+
+  @Override
   public AreaDTO createArea(AreaDTO areaDTO) {
     try {
       AreaEntity areaEntity = new AreaEntity();

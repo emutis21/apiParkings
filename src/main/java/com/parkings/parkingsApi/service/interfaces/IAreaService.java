@@ -8,6 +8,8 @@ public interface IAreaService {
 
   AreaDTO findById(String idArea);
 
+  List<AreaDTO> findAllByParqueadero(String idParqueadero);
+
   AreaDTO createArea(AreaDTO areaDTO);
 
   AreaDTO updateArea(String idArea, AreaDTO areaDTO);
