@@ -1,0 +1,33 @@
+# "is_disponible"	"k_id_area"
+# true	"A001"
+# true	"A001"
+# true	"A001"
+
+### GET ALL
+GET http://localhost:8080/espacio/find
+
+### GET BY ID
+GET http://localhost:8080/espacio/find/8
+
+### GET BY AREA
+GET http://localhost:8080/espacio/find/area/M001
+
+### CREATE
+POST http://localhost:8080/espacio/create
+Content-Type: application/json
+
+{
+  "disponible": true,
+  "idArea": "A004"
+}
+
+### UPDATE
+PUT http://localhost:8080/espacio/update/80
+Content-Type: application/json
+
+{
+  "disponible": false
+}
+
+### DELETE
+DELETE http://localhost:8080/espacio/delete/83

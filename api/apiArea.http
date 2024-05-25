@@ -19,7 +19,10 @@
 GET http://localhost:8080/area/find
 
 ### GET BY ID
-GET http://localhost:8080/area/find/A001
+GET http://localhost:8080/area/find/A006
+
+### GET BY PARQUEADERO
+GET http://localhost:8080/area/find/parqueadero/001PARK
 
 ### CREATE LOCALIDAD
 POST http://localhost:8080/area/create
@@ -33,11 +36,11 @@ Content-Type: application/json
 }
 
 ### UPDATE LOCALIDAD
-PUT http://localhost:8080/area/update/A006
+PUT http://localhost:8080/area/update/M009
 Content-Type: application/json
 
 {
-  "descripcion": "Área carros 6 en Usaquén"
+  "descripcion": "Área motos en Kennedy"
 }
 
 ### DELETE LOCALIDAD

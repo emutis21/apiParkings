@@ -1,0 +1,41 @@
+# "n_apellido1"	"n_apellido2"	"has_perro"	"k_tipo_id"	"k_num_id"	"k_id_area"	"n_nombre1"	"n_nombre2"
+# "Gonzalez"	"Perez"	true	"CC"	52695583	"A001"	"Juan"	"Carlos"
+# "Sanchez"	"Gomez"	false	"CC"	1001215701	"M002"	"Pedro"	"Pablo"
+# "Nieto"	"Cortes"	true	"CC"	1001215702	"A003"	"Daniel"	"Andres"
+# "Lopez"	"Vargas"	false	"CC"	1001215703	"M004"	"Tatiana"	"Marcela"
+# "Bernal"	"Espinosa"	true	"CC"	1001215704	"A005"	"Luis"	"Felipe"
+
+### GET ALL
+GET http://localhost:8080/vigilante/find
+
+### GET BY ID
+GET http://localhost:8080/vigilante/find/1001215705/CC
+
+### CREATE LOCALIDAD
+POST http://localhost:8080/vigilante/create
+Content-Type: application/json
+
+{
+  "apellido1": "Cortes",
+  "apellido2": "Nieto",
+  "hasPerro": true,
+  "id": {
+    "tipoId": "CC",
+    "numId": 1001215705
+  },
+  "idArea": "A005",
+  "nombre1": "Andres",
+  "nombre2": "Carlos"
+}
+
+### UPDATE LOCALIDAD
+PATCH http://localhost:8080/vigilante/update/1001215705/CC
+Content-Type: application/json
+
+{
+  "apellido1": "Cortés",
+  "nombre1": "Andrés"
+}
+
+### DELETE LOCALIDAD
+DELETE http://localhost:8080/vigilante/delete/1001215705/CC

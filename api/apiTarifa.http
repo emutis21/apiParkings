@@ -1,0 +1,43 @@
+# "k_id_tarifa"	"n_tipo_vehiculo"	"f_vigencia"	"v_valor"	"f_factor_tarifa"
+# "T1"	"BICICLETA"	"2024-05-18"	249.00	0.05
+# "T2"	"AUTOMOVIL"	"2024-05-18"	249.00	1.00
+# "T3"	"MOTOCICLETA"	"2024-05-18"	249.00	0.75
+
+# {
+#   "idTarifa": "T1",
+#   "tipoVehiculo": "BICICLETA",
+#   "vigencia": "2024-05-18",
+#   "valor": 249.0,
+#   "factorTarifa": 0.05
+# }
+
+### GET ALL
+GET http://localhost:8080/tarifa/find
+
+### GET BY ID
+GET http://localhost:8080/tarifa/find/T1
+
+### CREATE
+POST http://localhost:8080/tarifa/create
+Content-Type: application/json
+
+{
+  "idTarifa": "T4",
+  "tipoVehiculo": "BICICLETA",
+  "vigencia": "2024-05-18",
+  "valor": 249.0,
+  "factorTarifa": 0.05
+}
+
+### UPDATE
+PUT http://localhost:8080/tarifa/update/T4
+Content-Type: application/json
+
+{
+  "valor": 359.0,
+  "factorTarifa": 0.15
+}
+
+### DELETE
+DELETE http://localhost:8080/tarifa/delete/T4
+

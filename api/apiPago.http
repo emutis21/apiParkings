@@ -1,0 +1,43 @@
+# "n_forma"	"k_id_pago"	"v_valor_pagado"	"f_h_pago"	"k_id_registro"	"k_placa"
+# "EFECTIVO"	"PAGO002"	5000.00	"2024-05-18 17:42:37.465994"	"93917217-0b8c-4ab0-a4b7-329b4e82ad43"	"IPA532"
+
+# [
+#   {
+#     "idPago": "PAGO002",
+#     "formaPago": "EFECTIVO",
+#     "valorPagado": 5000.00,
+#     "fechaHoraPago": null,
+#     "idRegistro": "93917217-0b8c-4ab0-a4b7-329b4e82ad43"
+#   }
+# ]
+
+### GET ALL
+GET http://localhost:8080/pago/find
+
+### GET BY ID
+GET http://localhost:8080/pago/find/PAGO002
+
+### CREATE
+POST http://localhost:8080/pago/create
+Content-Type: application/json
+
+{
+  "idPago": "PAGO005",
+  "formaPago": "EFECTIVO",
+  "fechaHoraPago": "2024-05-19 16:42:37.465994",
+  "idRegistro": "85f2c386-0a52-445b-9e4e-4c3d9dcea3fe",
+  "placa": "IPA33F"
+}
+
+### UPDATE
+PUT http://localhost:8080/pago/update/PAGO003
+Content-Type: application/json
+
+{
+  "formaPago": "TARJETA"
+}
+
+### DELETE
+DELETE http://localhost:8080/pago/delete/PAGO003
+
+

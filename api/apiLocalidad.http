@@ -10,18 +10,18 @@
 GET http://localhost:8080/localidad/find
 
 ### GET BY ID
-GET http://localhost:8080/localidad/find/02MART
+GET http://localhost:8080/localidad/find/05KENN
 
-### CREATE LOCALIDAD
+### CREATE
 POST http://localhost:8080/localidad/create
 Content-Type: application/json
 
 {
-  "idLocalidad": "02MART",
-  "nombreLocalidad": "Los Mártires"
+  "idLocalidad":"02MART",
+  "nombreLocalidad":"Los Mártires"
 }
 
-### UPDATE LOCALIDAD
+### UPDATE
 PUT http://localhost:8080/localidad/update/02MART
 Content-Type: application/json
 
@@ -29,5 +29,5 @@ Content-Type: application/json
   "nombreLocalidad": "Los Martires"
 }
 
-### DELETE LOCALIDAD
+### DELETE
 DELETE http://localhost:8080/localidad/delete/02MART

@@ -1,0 +1,32 @@
+# "k_id_registro"	"k_placa"	"f_h_entrada"	"f_h_salida"	"n_tipo_vehiculo"	"k_id_espacio"	"k_id_area"
+# "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"	"IPA532"	"2024-05-18 01:30:40.255087"	"2024-05-18 01:31:59.543201"	"AUTOMOVIL"	1	"A001"
+
+
+### GET ALL
+GET http://localhost:8080/registro/find
+
+### GET BY ID
+GET http://localhost:8080/registro/find/984d3607-aee1-4537-bc8c-6ef208e8fd68
+
+### CREATE
+POST http://localhost:8080/registro/create
+Content-Type: application/json
+
+{
+  "placa": "VBM21B",
+  "tipoVehiculo": "MOTOCICLETA",
+  "idEspacio": 9,
+  "idArea": "M001"
+}
+
+### UPDATE
+PUT http://localhost:8080/registro/update/0b07f164-15e4-4c64-adc4-80e839f26cdd
+Content-Type: application/json
+
+{
+  "fechaHoraSalida": "2024-05-18 01:31:59.543201"
+}
+
+### DELETE
+DELETE http://localhost:8080/registro/delete/bd2dcd04-dc78-4f18-aa74-342fed5a63dd
+
